@@ -7,7 +7,7 @@ services:
     expose:
       - '27017'
     volumes:
-      - mongo-data:/data/db
+      - hi-sportdb-mongo-data:/data/db
     healthcheck:
       test: [ "CMD-SHELL", "mongosh --quiet --eval 'db.adminCommand({ ping: 1 })' > /dev/null" ]
       interval: 5s
@@ -18,7 +18,7 @@ services:
       - hi-sportdb-net
 
   hi-sportdb-elastic:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.4.2
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
@@ -34,7 +34,7 @@ services:
       timeout: 5s
       retries: 60
     volumes:
-      - es-data:/usr/share/elasticsearch/data
+      - hi-sportdb-es-data:/usr/share/elasticsearch/data
     restart: unless-stopped
     networks:
       - hi-sportdb-net
@@ -47,9 +47,9 @@ services:
       - ES_PORT=9200
       - MONGO_CONNECTION=mongodb://hi-sportdb-mongo:27017/
     depends_on:
-      mongo:
+      hi-sportdb-mongo:
         condition: service_healthy
-      elastic:
+      hi-sportdb-elastic:
         condition: service_healthy
     ports:
       - '8000:8000'
@@ -81,15 +81,17 @@ services:
       - ES_HOST=hi-sportdb-elastic
       - ES_PORT=9200
     depends_on:
-      elastic:
+      hi-sportdb-elastic:
         condition: service_healthy
     restart: no
     networks:
       - hi-sportdb-net
+    profiles:
+      - indexer
 
 volumes:
-  es-data:
-  mongo-data:
+  hi-sportdb-es-data:
+  hi-sportdb-mongo-data:
 
 networks:
   hi-sportdb-net:

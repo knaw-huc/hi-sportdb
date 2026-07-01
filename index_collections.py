@@ -15,7 +15,7 @@ from elasticsearch import Elasticsearch
 from procrustus_indexer import build_indexer
 
 DATA_DIR = Path(__file__).parent / "data"
-OUT_DIR = Path(__file__).parent / "out"
+OUT_DIR = Path(__file__).parent / "json-data"
 INDEX_NAME = "hi-sportdb"
 CONFIG = "hi-sportdb-config.toml"
 

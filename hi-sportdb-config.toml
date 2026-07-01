@@ -22,6 +22,10 @@ type="keyword"
 path="jmes:vereniging.opm_naam"
 type="text"
 
+[index.facet.plaats]
+path="jmes:vereniging.gemeente1984"
+type="keyword"
+
 [index.facet.doelstelling]
 path="jmes:vereniging.doelstelling"
 type="text"
@@ -50,10 +54,6 @@ type="number"
 path="jmes:vereniging.einddatum_soort"
 type="keyword"
 
-[index.facet.plaats]
-path="jmes:vereniging.gemeente1984"
-type="keyword"
-
 [index.facet.provincie]
 path="jmes:vereniging.provincie.provincie"
 type="keyword"
@@ -65,3 +65,19 @@ type="keyword"
 [index.facet.verantwoordingGegevens]
 path="jmes:vereniging.verantwoording_gegevens"
 type="text"
+
+[index.facet.werkingsGebied]
+path="jmes:vereniging.werkingsbebied.werkingsgebied"
+type="text"
+
+[index.facet.speeldag]
+path="jmes:vereniging.speeldag.dag"
+type="text"
+
+[index.facet.landelijkeBond]
+path="jmes:vereniging.landelijke_bond.Landelijke_bond"
+type="nested"
+
+[index.facet.regionaleBond]
+path="jmes:vereniging.regionale_bond.Regionale_bond"
+type="nested"

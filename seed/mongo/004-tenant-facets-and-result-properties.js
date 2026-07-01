@@ -9,12 +9,12 @@ tenantDb.facets.deleteMany({ dataset_name: DATASET_NAME });
      { dataset_name: DATASET_NAME, name: "Sport", property: "sport", type: "text", order: 0 },
      { dataset_name: DATASET_NAME, name: "Naam", property: "naam", type: "text", order: 1 },
      { dataset_name: DATASET_NAME, name: "Type", property: "type", type: "text", order: 2 },
-     { dataset_name: DATASET_NAME, name: "Plaats", property: "gemeente1984", type: "text", order: 3 },
+     { dataset_name: DATASET_NAME, name: "Plaats", property: "plaats", type: "text", order: 3 },
      { dataset_name: DATASET_NAME, name: "Provincie", property: "provincie", type: "text", order: 4 },
      { dataset_name: DATASET_NAME, name: "Beginjaar", property: "beginDatumJaar", type: "number", order: 5 },
-     { dataset_name: DATASET_NAME, name: "Status beginjaar", property: "beginjaarSoort", type: "text", order: 6 },
-     { dataset_name: DATASET_NAME, name: "Eindjaar", property: "einddatumJaar", type: "number", order: 7 },
-     { dataset_name: DATASET_NAME, name: "Status eindjaar", property: "einddatumSoort", type: "text", order: 8 },
+     { dataset_name: DATASET_NAME, name: "Status beginjaar", property: "beginDatumSoort", type: "text", order: 6 },
+     { dataset_name: DATASET_NAME, name: "Eindjaar", property: "eindDatumJaar", type: "number", order: 7 },
+     { dataset_name: DATASET_NAME, name: "Status eindjaar", property: "eindDatumSoort", type: "text", order: 8 },
      { dataset_name: DATASET_NAME, name: "Levensbeschouwing", property: "levensbeschouwing", type: "text", order: 9 }
 ]);
 
