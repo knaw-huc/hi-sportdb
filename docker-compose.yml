@@ -19,7 +19,6 @@ services:
 
   hi-sportdb-elastic:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.12.2
-    container_name: panoptes-elasticsearch
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
@@ -44,9 +43,9 @@ services:
     image: registry.diginfra.net/tsd/panoptes-backend:hi-sportdb
     environment:
       - ES_SCHEME=http
-      - ES_HOST=elastic
+      - ES_HOST=hi-sportdb-elastic
       - ES_PORT=9200
-      - MONGO_CONNECTION=mongodb://mongo:27017/
+      - MONGO_CONNECTION=mongodb://hi-sportdb-mongo:27017/
     depends_on:
       mongo:
         condition: service_healthy
@@ -80,7 +79,7 @@ services:
     image: registry.diginfra.net/tsd/hi-sportdb-indexer:latest
     command: ["data/Database-Bataafse-Politieke-Tijdschriften-V3.xlsx", "ALL"]
     environment:
-      - ES_HOST=elastic
+      - ES_HOST=hi-sportdb-elastic
       - ES_PORT=9200
     depends_on:
       elastic:
