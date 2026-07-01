@@ -127,12 +127,15 @@ def main() -> None:
         print(f"No XML files found in {input_dir}")
         return
 
+    current_dir: Path | None = None
     for xml_path in xml_files:
         # Mirror the input subdirectory structure under the output dir.
         relative = xml_path.relative_to(input_dir).with_suffix(".json")
         out_path = output_dir / relative
         convert_file(xml_path, out_path, relative.as_posix())
-        print(f"{xml_path} -> {out_path}")
+        if relative.parent != current_dir:
+            current_dir = relative.parent
+            print(f"Converting {current_dir}")
 
     if not skip_import:
         import_into_es(INDEX_NAME, CONFIG, es, output_dir)

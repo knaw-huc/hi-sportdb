@@ -10,6 +10,7 @@ RUN poetry install --no-root --no-interaction
 COPY read_and_index.py ./
 COPY *.toml ./
 COPY data/ ./data/
+CMD tar -zxvf ./data/sport_20260603.tar.gz
 
 ENTRYPOINT ["poetry", "run", "python", "index_collections.py"]
-CMD ["./data"]
+CMD ["./data/sport/ingforms/data"]
