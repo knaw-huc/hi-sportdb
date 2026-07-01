@@ -1,7 +1,7 @@
 services:
 
   hi-sportdb-mongo:
-    image: registry.diginfra.net/tsd/hi-sportdb-mongo:latest
+    image: registry.diginfra.net/tsd/hi-sportdb-mongo:0.0.1
     ports:
       - '27017:27017'
     expose:
@@ -60,11 +60,11 @@ services:
       - hi-sportdb-net
 
   hi-sportdb-panoptes-browser:
-    image: registry.diginfra.net/tsd/hi-sportdb-browser:latest
+    image: registry.diginfra.net/tsd/hi-sportdb-browser:0.0.1
     environment:
       - VITE_PANOPTES_URL=http://localhost:8000
       - VITE_PANOPTES_IS_EMBEDDED=false
-      - VITE_PANOPTES_DATASET=politieke-tijdschriften
+      - VITE_PANOPTES_DATASET=sport
       - VITE_PANOPTES_SEARCH_PATH=/$$dataset/search
       - VITE_PANOPTES_DETAIL_PATH=/$$dataset/details/$$id
     ports:
@@ -76,7 +76,7 @@ services:
       - hi-sportdb-net
 
   hi-sportdb-indexer:
-    image: registry.diginfra.net/tsd/hi-sportdb-indexer:latest
+    image: registry.diginfra.net/tsd/hi-sportdb-indexer:0.0.1
     environment:
       - ES_HOST=hi-sportdb-elastic
       - ES_PORT=9200
