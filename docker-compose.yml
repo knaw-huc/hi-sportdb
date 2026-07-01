@@ -77,13 +77,13 @@ services:
 
   hi-sportdb-indexer:
     image: registry.diginfra.net/tsd/hi-sportdb-indexer:latest
-    command: ["data/Database-Bataafse-Politieke-Tijdschriften-V3.xlsx", "ALL"]
     environment:
       - ES_HOST=hi-sportdb-elastic
       - ES_PORT=9200
     depends_on:
       elastic:
         condition: service_healthy
+    restart: no
     networks:
       - hi-sportdb-net
 
