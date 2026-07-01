@@ -1,0 +1,96 @@
+services:
+
+  hi-sportdb-mongo:
+    image: registry.diginfra.net/tsd/hi-sportdb-mongo:latest
+    ports:
+      - '27017:27017'
+    expose:
+      - '27017'
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: [ "CMD-SHELL", "mongosh --quiet --eval 'db.adminCommand({ ping: 1 })' > /dev/null" ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+    networks:
+      - hi-sportdb-net
+
+  hi-sportdb-elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.2
+    container_name: panoptes-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    expose:
+      - '9200'
+      - '9300'
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -fsS http://localhost:9200 >/dev/null" ]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    restart: unless-stopped
+    networks:
+      - hi-sportdb-net
+
+  hi-sportdb-panoptes:
+    image: registry.diginfra.net/tsd/panoptes-backend:hi-sportdb
+    environment:
+      - ES_SCHEME=http
+      - ES_HOST=elastic
+      - ES_PORT=9200
+      - MONGO_CONNECTION=mongodb://mongo:27017/
+    depends_on:
+      mongo:
+        condition: service_healthy
+      elastic:
+        condition: service_healthy
+    ports:
+      - '8000:8000'
+    expose:
+      - '8000'
+    restart: unless-stopped
+    networks:
+      - hi-sportdb-net
+
+  hi-sportdb-panoptes-browser:
+    image: registry.diginfra.net/tsd/hi-sportdb-browser:latest
+    environment:
+      - VITE_PANOPTES_URL=http://localhost:8000
+      - VITE_PANOPTES_IS_EMBEDDED=false
+      - VITE_PANOPTES_DATASET=politieke-tijdschriften
+      - VITE_PANOPTES_SEARCH_PATH=/$$dataset/search
+      - VITE_PANOPTES_DETAIL_PATH=/$$dataset/details/$$id
+    ports:
+      - "80:80"
+    expose:
+      - "80"
+    restart: unless-stopped
+    networks:
+      - hi-sportdb-net
+
+  hi-sportdb-indexer:
+    image: registry.diginfra.net/tsd/hi-sportdb-indexer:latest
+    command: ["data/Database-Bataafse-Politieke-Tijdschriften-V3.xlsx", "ALL"]
+    environment:
+      - ES_HOST=elastic
+      - ES_PORT=9200
+    depends_on:
+      elastic:
+        condition: service_healthy
+    networks:
+      - hi-sportdb-net
+
+volumes:
+  es-data:
+  mongo-data:
+
+networks:
+  hi-sportdb-net:

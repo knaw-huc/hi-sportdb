@@ -1,0 +1,15 @@
+FROM python:3.14-slim
+
+RUN pip install --no-cache-dir poetry
+
+WORKDIR /app
+
+COPY pyproject.toml ./
+RUN poetry install --no-root --no-interaction
+
+COPY read_and_index.py ./
+COPY *.toml ./
+COPY data/ ./data/
+
+ENTRYPOINT ["poetry", "run", "python", "index_collections.py"]
+CMD ["./data"]
