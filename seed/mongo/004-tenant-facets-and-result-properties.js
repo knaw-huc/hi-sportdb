@@ -13,9 +13,9 @@ tenantDb.facets.deleteMany({ dataset_name: DATASET_NAME });
      { dataset_name: DATASET_NAME, name: "Provincie", property: "provincie", type: "text", order: 4 },
      { dataset_name: DATASET_NAME, name: "Landelijke bond", property: "landelijkeBondNaam", type: "text", order: 5 },
      { dataset_name: DATASET_NAME, name: "Regionale bond", property: "regionaleBondNaam", type: "text", order: 6 },
-     { dataset_name: DATASET_NAME, name: "Beginjaar", property: "beginDatumJaar", type: "number", order: 7 },
+     { dataset_name: DATASET_NAME, name: "Beginjaar", property: "beginDatumJaar", type: "range", order: 7 },
      { dataset_name: DATASET_NAME, name: "Status beginjaar", property: "beginDatumSoort", type: "text", order: 8 },
-     { dataset_name: DATASET_NAME, name: "Eindjaar", property: "eindDatumJaar", type: "number", order: 9 },
+     { dataset_name: DATASET_NAME, name: "Eindjaar", property: "eindDatumJaar", type: "range", order: 9 },
      { dataset_name: DATASET_NAME, name: "Status eindjaar", property: "eindDatumSoort", type: "text", order: 10 },
      { dataset_name: DATASET_NAME, name: "Levensbeschouwing", property: "levensbeschouwing", type: "text", order: 11 }
 ]);
