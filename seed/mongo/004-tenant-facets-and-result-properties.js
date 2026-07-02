@@ -24,4 +24,9 @@ tenantDb.result_properties.deleteMany({ dataset_name: DATASET_NAME });
 tenantDb.result_properties.insertMany([
     { dataset_name: DATASET_NAME, name: "id", path: "$.id", type: 'text', order: 0 },
     { dataset_name: DATASET_NAME, name: "title", path: "$.naam", type: 'text', order: 1 },
+    { dataset_name: DATASET_NAME, name: "place", path: "$.plaats", type: 'text', order: 2 },
+    { dataset_name: DATASET_NAME, name: "province", path: "$.provincie", type: 'text', order: 3 },
+    { dataset_name: DATASET_NAME, name: "sport", path: "$.sport", type: 'text', order: 4 },
+    { dataset_name: DATASET_NAME, name: "startDateYear", path: "$.beginDatumJaar", type: 'text', order: 5 },
+    { dataset_name: DATASET_NAME, name: "philosophy", path: "$.levensbeschouwing", type: 'text', order: 6 },
 ]);

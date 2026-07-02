@@ -94,7 +94,7 @@ def parse_args() -> argparse.Namespace:
         nargs="?",
         type=Path,
         default=DATA_DIR,
-        help=f"Directory to scan recursively for .xml files (default: {DATA_DIR}).",
+        help=f"Directory to scan recursively for files to be indexed (default: {DATA_DIR}).",
     )
     parser.add_argument(
         "-o",
