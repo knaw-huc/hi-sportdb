@@ -75,9 +75,17 @@ path="jmes:vereniging.speeldag.dag"
 type="text"
 
 [index.facet.landelijkeBond]
-path="jmes:vereniging.landelijke_bond.Landelijke_bond"
+path="jmes:[not_null(vereniging.landelijke_bond.Landelijke_bond, `[]`)][]"
 type="nested"
 
+[index.facet.landelijkeBondNaam]
+path="jmes:[vereniging.landelijke_bond.Landelijke_bond][].naam"
+type="keyword"
+
 [index.facet.regionaleBond]
-path="jmes:vereniging.regionale_bond.Regionale_bond"
+path="jmes:[not_null(vereniging.regionale_bond.Regionale_bond, `[]`)][]"
 type="nested"
+
+[index.facet.regionaleBondNaam]
+path="jmes:[vereniging.regionale_bond.Regionale_bond][].naam"
+type="keyword"
