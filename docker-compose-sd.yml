@@ -37,22 +37,22 @@ services:
     image: registry.diginfra.net/tsd/panoptes-backend:hi-sportdb
     environment:
       - ES_SCHEME=http
-      - ES_HOST=bpt-elastic
+      - ES_HOST=hi-sportdb-elastic
       - ES_PORT=9200
       - MONGO_CONNECTION=mongodb://hi-sportdb-mongo:27017/
     depends_on:
-      bpt-mongo:
+      hi-sportdb-mongo:
         condition: service_healthy
-      bpt-elastic:
+      hi-sportdb-elastic:
         condition: service_healthy
     expose:
       - "8000"
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-public"
-      - "traefik.http.routers.bpt-panoptes.entrypoints=http"
-      - "traefik.http.routers.bpt-panoptes.rule=Host(`bataafse-politieke-tijdschriften.sd.di.huc.knaw.nl`) && PathPrefix(`/api`)"
-      - "traefik.http.services.bpt-panoptes.loadbalancer.server.port=8000"
+      - "traefik.http.routers.hi-sportdb-panoptes.entrypoints=http"
+      - "traefik.http.routers.hi-sportdb-panoptes.rule=Host(`sport.sd.di.huc.knaw.nl`) && PathPrefix(`/api`)"
+      - "traefik.http.services.hi-sportdb-panoptes.loadbalancer.server.port=8000"
     restart: unless-stopped
     networks:
       - hi-sportdb-net
@@ -71,9 +71,9 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-public"
-      - "traefik.http.routers.bpt-panoptes-browser.entrypoints=http"
-      - "traefik.http.routers.bpt-panoptes-browser.rule=Host(`sport.sd.di.huc.knaw.nl`)"
-      - "traefik.http.services.bpt-panoptes-browser.loadbalancer.server.port=80"
+      - "traefik.http.routers.hi-sportdb-browser.entrypoints=http"
+      - "traefik.http.routers.hi-sportdb-browser.rule=Host(`sport.sd.di.huc.knaw.nl`)"
+      - "traefik.http.services.hi-sportdb-browser.loadbalancer.server.port=80"
     restart: unless-stopped
     networks:
       - hi-sportdb-net
@@ -85,7 +85,7 @@ services:
       - ES_HOST=hi-sportdb-elastic
       - ES_PORT=9200
     depends_on:
-      bpt-elastic:
+      hi-sportdb-elastic:
         condition: service_healthy
     restart: no
     networks:
