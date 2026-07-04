@@ -7,10 +7,6 @@ WORKDIR /app
 COPY pyproject.toml ./
 RUN poetry install --no-root --no-interaction
 
-COPY read_and_index.py ./
+COPY index_collections.py ./
 COPY *.toml ./
-COPY data/ ./data/
-CMD tar -zxvf ./data/sport_20260603.tar.gz
-
-ENTRYPOINT ["poetry", "run", "python", "index_collections.py"]
-CMD ["./data/sport/ingforms/data"]
+COPY ./data/*.tar.gz ./data/
