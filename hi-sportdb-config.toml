@@ -67,7 +67,7 @@ path="jmes:vereniging.verantwoording_gegevens"
 type="text"
 
 [index.facet.werkingsGebied]
-path="jmes:vereniging.werkingsbebied.werkingsgebied"
+path="jmes:vereniging.werkingsgebied.werkingsgebied"
 type="text"
 
 [index.facet.speeldag]
