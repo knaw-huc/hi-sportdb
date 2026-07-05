@@ -53,12 +53,17 @@ def convert_file(xml_path: Path, out_path: Path, id_key: str) -> None:
     root = Et.parse(xml_path).getroot()
     obj = element_to_obj(root)
 
+    # Type derived from the directory: "bond" when a directory name contains
+    # "bonden", otherwise "vereniging".
+    in_bonden = any("bonden" in part.lower() for part in xml_path.parent.parts)
+    type_value = "bond" if in_bonden else "vereniging"
+
     # Stable id derived from the file's relative path; prepend so it is the first key.
     file_id = str(uuid.uuid5(ID_NAMESPACE, id_key))
     if isinstance(obj, dict):
-        obj = {"id": file_id, **obj}
+        obj = {"id": file_id, "type": type_value, **obj}
     else:
-        obj = {"id": file_id, "value": obj}
+        obj = {"id": file_id, "type": type_value, "value": obj}
 
     data = {root.tag: obj}
 
@@ -130,6 +135,7 @@ def main() -> None:
     current_dir: Path | None = None
     for xml_path in xml_files:
         # Mirror the input subdirectory structure under the output dir.
+        name = xml_path.name
         relative = xml_path.relative_to(input_dir).with_suffix(".json")
         out_path = output_dir / relative
         convert_file(xml_path, out_path, relative.as_posix())

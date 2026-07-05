@@ -89,3 +89,11 @@ type="nested"
 [index.facet.regionaleBondNaam]
 path="jmes:[vereniging.regionale_bond.Regionale_bond][].naam"
 type="keyword"
+
+[index.facet.opmerkingen]
+path="jmes:vereniging.opmerkingen"
+type="text"
+
+[index.facet.type]
+path="jmes:vereniging.type"
+type="keyword"
