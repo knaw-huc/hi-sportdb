@@ -25,7 +25,14 @@ ID_NAMESPACE = uuid.uuid5(uuid.NAMESPACE_URL, "hi-sportdb")
 _es_host = os.environ.get("ES_HOST", "localhost")
 _es_port = os.environ.get("ES_PORT", "9200")
 _es_scheme = os.environ.get("ES_SCHEME", "http")
-es = Elasticsearch(hosts=[f"{_es_scheme}://{_es_host}:{_es_port}"])
+_es_username = os.environ.get("ES_USERNAME", "")
+_es_password = os.environ.get("ES_PASSWORD", "")
+_es_verify_certs = (_es_scheme != "https")
+_es_ssl_show_warn = (_es_scheme != "https")
+es = Elasticsearch(hosts=[f"{_es_scheme}://{_es_host}:{_es_port}"],
+                   http_auth=(_es_username, _es_password),
+                   verify_certs=_es_verify_certs,
+                   ssl_show_warn=_es_ssl_show_warn)
 
 def element_to_obj(element: Et.Element):
     """Recursively convert an XML element to a JSON-compatible value."""
