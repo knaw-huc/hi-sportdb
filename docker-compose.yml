@@ -60,7 +60,7 @@ services:
       - hi-sportdb-net
 
   hi-sportdb-panoptes-browser:
-    image: registry.diginfra.net/tsd/hi-sportdb-browser:0.0.1
+    image: registry.diginfra.net/tsd/hi-sportdb-browser:0.0.2
     environment:
       - VITE_PANOPTES_URL=http://localhost:8000
       - VITE_PANOPTES_IS_EMBEDDED=false
