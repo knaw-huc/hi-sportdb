@@ -59,7 +59,7 @@ services:
       - traefik-public
 
   hi-sportdb-browser:
-    image: registry.diginfra.net/tsd/hi-sportdb-browser:0.0.2
+    image: registry.diginfra.net/tsd/hi-sportdb-browser:0.0.3
     environment:
       - VITE_PANOPTES_URL=https://sport.sd.di.huc.knaw.nl
       - VITE_PANOPTES_IS_EMBEDDED=false
