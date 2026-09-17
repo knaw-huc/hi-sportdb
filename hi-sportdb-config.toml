@@ -7,93 +7,110 @@ name="hi-sportdb"
 format="json"
 
 [index.id]
-path="jmes:vereniging.id"
+path="jmes:id"
 type="keyword"
 
 [index.facet.sport]
-path="jmes:vereniging.sport.soort_sport"
+path="jmes:sport"
 type="keyword"
 
 [index.facet.naam]
-path="jmes:vereniging.naam"
+path="jmes:naam"
 type="keyword"
 
-[index.facet.opmerkingNaam]
-path="jmes:vereniging.opm_naam"
+[index.facet.alternatieveNamen]
+path="jmes:alternatieve_namen"
 type="text"
 
-[index.facet.plaats]
-path="jmes:vereniging.gemeente1984"
+[index.facet.opmerkingNaam]
+path="jmes:bronrecords[].naam_opmerking"
+type="text"
+
+[index.facet.gemeente1984]
+path="jmes:locatie.gemeente_1984_bron"
 type="keyword"
+
+[index.facet.plaats]
+path="jmes:locatie.plaats_bron"
 
 [index.facet.doelstelling]
 path="jmes:vereniging.doelstelling"
 type="text"
 
 [index.facet.beginDatumJaar]
-path="jmes:vereniging.begindatum.year"
+path="jmes:begindatum.jaar"
 type="number"
 
 [index.facet.beginDatumMaand]
-path="jmes:vereniging.begindatum.month"
+path="jmes:begindatum.maand"
 type="number"
 
 [index.facet.beginDatumDag]
-path="jmes:vereniging.begindatum.day"
+path="jmes:begindatum.dag"
 type="number"
 
 [index.facet.beginDatumSoort]
-path="jmes:vereniging.begindatum_soort"
+path="jmes:begindatum.betekenis"
 type="keyword"
 
 [index.facet.eindDatumJaar]
-path="jmes:vereniging.einddatum.year"
+path="jmes:einddatum.jaar"
 type="number"
 
 [index.facet.eindDatumSoort]
-path="jmes:vereniging.einddatum_soort"
+path="jmes:einddatum.betekenis"
 type="keyword"
 
 [index.facet.provincie]
-path="jmes:vereniging.provincie.provincie"
+path="jmes:locatie.provincie"
 type="keyword"
 
 [index.facet.levensbeschouwing]
-path="jmes:vereniging.levensbeschouwing"
+path="jmes:levensbeschouwing"
 type="keyword"
 
 [index.facet.verantwoordingGegevens]
-path="jmes:vereniging.verantwoording_gegevens"
+path="jmes:bronrecords[].verantwoording"
 type="text"
 
 [index.facet.werkingsGebied]
-path="jmes:vereniging.werkingsgebied.werkingsgebied"
+path="jmes:werkingsgebied"
 type="text"
 
 [index.facet.speeldag]
-path="jmes:vereniging.speeldag.dag"
+path="jmes:speeldag"
 type="text"
 
 [index.facet.landelijkeBond]
-path="jmes:[not_null(vereniging.landelijke_bond.Landelijke_bond, `[]`)][]"
+path="""
+jmes:[not_null(lidmaatschappen[?niveau == 'nationaal'], `[]`)][].{
+  bond: bondsvermelding,
+  beginjaar: beginjaar,
+  eindjaar: eindjaar
+}"""
 type="nested"
 
 [index.facet.landelijkeBondNaam]
-path="jmes:[vereniging.landelijke_bond.Landelijke_bond][].naam"
+path="jmes:[vereniging.landelijke_bond.Landelijke_bond][].bondsvermelding"
 type="keyword"
 
 [index.facet.regionaleBond]
-path="jmes:[not_null(vereniging.regionale_bond.Regionale_bond, `[]`)][]"
+path="""
+jmes:[not_null(lidmaatschappen[?niveau == 'regionaal'], `[]`)][].{
+  bond: bondsvermelding,
+  beginjaar: beginjaar,
+  eindjaar: eindjaar
+}"""
 type="nested"
 
 [index.facet.regionaleBondNaam]
-path="jmes:[vereniging.regionale_bond.Regionale_bond][].naam"
+path="jmes:lidmaatschappen[?niveau == 'regionaal'].bondsvermelding"
 type="keyword"
 
 [index.facet.opmerkingen]
-path="jmes:vereniging.opmerkingen"
+path="jmes:bronrecords[].opmerkingen"
 type="text"
 
 [index.facet.type]
-path="jmes:vereniging.type"
+path="jmes:type"
 type="keyword"
