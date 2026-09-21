@@ -76,7 +76,7 @@ services:
       - hi-sportdb-net
 
   hi-sportdb-indexer:
-    image: registry.diginfra.net/tsd/hi-sportdb-indexer:0.0.3
+    image: registry.diginfra.net/tsd/hi-sportdb-indexer:0.0.4
     environment:
       - ES_HOST=hi-sportdb-elastic
       - ES_PORT=9200

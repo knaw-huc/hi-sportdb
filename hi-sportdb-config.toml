@@ -85,9 +85,23 @@ type="text"
 path="jmes:lidmaatschappen[?niveau == 'landelijk'].bondsvermelding"
 type="keyword"
 
+[index.facet.landelijkeBond]
+path="""
+jmes:[not_null(lidmaatschappen[?niveau == 'landelijk'], `[]`)][].{
+  bond: bondsvermelding
+}"""
+type="nested"
+
 [index.facet.regionaleBondNaam]
 path="jmes:lidmaatschappen[?niveau == 'regionaal'].bondsvermelding"
 type="keyword"
+
+[index.facet.regionaleBond]
+path="""
+jmes:[not_null(lidmaatschappen[?niveau == 'regionaal'], `[]`)][].{
+  bond: bondsvermelding
+}"""
+type="nested"
 
 [index.facet.opmerkingen]
 path="jmes:bronrecords[].opmerkingen"
