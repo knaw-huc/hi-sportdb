@@ -61,11 +61,11 @@ tenantDb.detail_properties.insertMany([
                   },
                   {
                     "value": "$data#$.verantwoordingGegevens",
-                    "type": "markdown"
+                    "type": "list"
                   },
                   {
                     "value": "$data#$.opmerkingen",
-                    "type": "markdown"
+                    "type": "list"
                   }
                 ]
               }

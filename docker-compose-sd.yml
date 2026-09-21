@@ -1,6 +1,6 @@
 services:
   hi-sportdb-mongo:
-    image: registry.diginfra.net/tsd/hi-sportdb-mongo:0.0.1
+    image: registry.diginfra.net/tsd/hi-sportdb-mongo:0.0.2
     volumes:
       - hi-sportdb-mongo-data:/data/db
     healthcheck:
@@ -59,7 +59,7 @@ services:
       - traefik-public
 
   hi-sportdb-browser:
-    image: registry.diginfra.net/tsd/hi-sportdb-browser:0.0.4
+    image: registry.diginfra.net/tsd/hi-sportdb-browser:0.0.5
     environment:
       - VITE_PANOPTES_URL=https://sport.sd.di.huc.knaw.nl
       - VITE_PANOPTES_IS_EMBEDDED=false
@@ -80,7 +80,7 @@ services:
       - traefik-public
 
   hi-sportdb-indexer:
-    image: registry.diginfra.net/tsd/hi-sportdb-indexer:0.0.1
+    image: registry.diginfra.net/tsd/hi-sportdb-indexer:0.0.2
     environment:
       - ES_HOST=hi-sportdb-elastic
       - ES_PORT=9200

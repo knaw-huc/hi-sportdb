@@ -7,6 +7,6 @@ WORKDIR /app
 COPY pyproject.toml ./
 RUN poetry install --no-root --no-interaction
 
-COPY index_collections.py ./
+COPY index_collections_xls.py ./
 COPY *.toml ./
-COPY ./data/*.tar.gz ./data/
+COPY ./data/Dataset_uit_csv.xlsx ./data/
