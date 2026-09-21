@@ -80,7 +80,7 @@ services:
       - traefik-public
 
   hi-sportdb-indexer:
-    image: registry.diginfra.net/tsd/hi-sportdb-indexer:0.0.2
+    image: registry.diginfra.net/tsd/hi-sportdb-indexer:0.0.3
     environment:
       - ES_HOST=hi-sportdb-elastic
       - ES_PORT=9200

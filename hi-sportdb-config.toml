@@ -81,27 +81,9 @@ type="text"
 path="jmes:speeldag"
 type="text"
 
-[index.facet.landelijkeBond]
-path="""
-jmes:[not_null(lidmaatschappen[?niveau == 'nationaal'], `[]`)][].{
-  bond: bondsvermelding,
-  beginjaar: beginjaar,
-  eindjaar: eindjaar
-}"""
-type="nested"
-
 [index.facet.landelijkeBondNaam]
-path="jmes:[vereniging.landelijke_bond.Landelijke_bond][].bondsvermelding"
+path="jmes:lidmaatschappen[?niveau == 'landelijk'].bondsvermelding"
 type="keyword"
-
-[index.facet.regionaleBond]
-path="""
-jmes:[not_null(lidmaatschappen[?niveau == 'regionaal'], `[]`)][].{
-  bond: bondsvermelding,
-  beginjaar: beginjaar,
-  eindjaar: eindjaar
-}"""
-type="nested"
 
 [index.facet.regionaleBondNaam]
 path="jmes:lidmaatschappen[?niveau == 'regionaal'].bondsvermelding"
