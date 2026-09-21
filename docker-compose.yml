@@ -1,7 +1,7 @@
 services:
 
   hi-sportdb-mongo:
-    image: registry.diginfra.net/tsd/hi-sportdb-mongo:0.0.2
+    image: registry.diginfra.net/tsd/hi-sportdb-mongo:0.0.3
     ports:
       - '27017:27017'
     expose:

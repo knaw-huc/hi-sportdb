@@ -1,6 +1,6 @@
 services:
   hi-sportdb-mongo:
-    image: registry.diginfra.net/tsd/hi-sportdb-mongo:0.0.2
+    image: registry.diginfra.net/tsd/hi-sportdb-mongo:0.0.3
     volumes:
       - hi-sportdb-mongo-data:/data/db
     healthcheck:
