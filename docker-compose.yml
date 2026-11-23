@@ -20,6 +20,7 @@ services:
   hi-sportdb-elastic:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.4.2
     environment:
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g -XX:-UseBASE64Intrinsics
       - discovery.type=single-node
       - xpack.security.enabled=false
     ports:
