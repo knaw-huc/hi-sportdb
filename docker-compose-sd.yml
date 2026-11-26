@@ -12,38 +12,17 @@ services:
     networks:
       - hi-sportdb-net
 
-  hi-sportdb-elastic:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.12.2
-    environment:
-      - ES_JAVA_OPTS=-Xms1g -Xmx1g -XX:-UseBASE64Intrinsics
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-    healthcheck:
-      test: [ "CMD-SHELL", "curl -fsS http://localhost:9200 >/dev/null" ]
-      interval: 5s
-      timeout: 5s
-      retries: 60
-    volumes:
-      - hi-sportdb-es-data:/usr/share/elasticsearch/data
-    deploy:
-      resources:
-        limits:
-          memory: 2g
-    restart: unless-stopped
-    networks:
-      - hi-sportdb-net
-
   hi-sportdb-panoptes:
     image: registry.diginfra.net/tsd/panoptes-backend:hi-sportdb
     environment:
-      - ES_SCHEME=http
-      - ES_HOST=hi-sportdb-elastic
-      - ES_PORT=9200
-      - MONGO_CONNECTION=mongodb://hi-sportdb-mongo:27017/
+      - ES_HOST=${ES_HOST}
+      - ES_PORT=${ES_PORT}
+      - ES_SCHEME=${ES_SCHEME}
+      - ES_USERNAME=${ES_USERNAME}
+      - ES_PASSWORD=${ES_PASSWORD}
+      - MONGO_CONNECTION=${MONGO}
     depends_on:
       hi-sportdb-mongo:
-        condition: service_healthy
-      hi-sportdb-elastic:
         condition: service_healthy
     expose:
       - "8000"
@@ -79,22 +58,7 @@ services:
       - hi-sportdb-net
       - traefik-public
 
-  hi-sportdb-indexer:
-    image: registry.diginfra.net/tsd/hi-sportdb-indexer:0.0.4
-    environment:
-      - ES_HOST=hi-sportdb-elastic
-      - ES_PORT=9200
-    depends_on:
-      hi-sportdb-elastic:
-        condition: service_healthy
-    restart: no
-    networks:
-      - hi-sportdb-net
-    tty: true
-    stdin_open: true
-
 volumes:
-  hi-sportdb-es-data:
   hi-sportdb-mongo-data:
 
 networks:

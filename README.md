@@ -125,7 +125,18 @@ frontend, and this indexer) is defined in `docker-compose.yml`:
 docker compose up
 ```
 
-The indexer image is built from `Dockerfile.indexer`.
+The indexer image is built from `Dockerfile.indexer`, which contains the script for indexing the Excel file into an ElasticSearch instance.
+
+The indexer image is not strictly necessary; you can point to an existing ElasticSearch (and MongoDB) by using environment variables.
+
+```
+ES_HOST=my-es-host
+ES_PORT=9200
+ES_SCHEME=http
+ES_USERNAME=elastic
+ES_PASSWORD=passwordhere
+MONGO=mongodb://some-mongodb:27017/
+```
 
 ## Configuration
 
